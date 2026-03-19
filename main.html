@@ -1,20 +1,79 @@
-<div class='tableauPlaceholder' id='viz1'>
-  <object class='tableauViz' width='1000' height='800'>
-    <param name='host_url' value='https://public.tableau.com/' />
-    <param name='name' value='DVT_Proj/Dashboard12' />
-    <param name='tabs' value='no' />
-    <param name='toolbar' value='yes' />
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Menu Driven Tableau Dashboards</title>
+  <script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    #menu { margin-bottom: 20px; }
+    .tableauPlaceholder { width: 1000px; height: 800px; }
+  </style>
+</head>
+<body>
+
+<h2>Interactive Tableau Dashboards</h2>
+
+<!-- Dropdown Menu -->
+<select id="menu" onchange="loadDashboard()">
+  <option value="">-- Select a Dashboard --</option>
+  <option value="DVT_Proj/Dashboard12">Dashboard 1</option>
+  <option value="DVT_Proj/Dashboard12">Dashboard 2</option>
+  <option value="DVT_Proj/Dashboard12">Dashboard 3</option>
+</select>
+
+<!-- Tableau Placeholder -->
+<div class="tableauPlaceholder" id="vizContainer">
+  <object class="tableauViz" width="1000" height="800">
+    <param name="host_url" value="https://public.tableau.com/" >
+    <param name="name" value="DVT_Proj/Dashboard12" >
+    <param name="tabs" value="no" >
+    <param name="toolbar" value="yes" >
   </object>
 </div>
 
 <script>
-function refreshDashboard() {
-    document.getElementById("tableauFrame").src =
-    document.getElementById("tableauFrame").src;
-}
+  function loadDashboard() {
+    const selected = document.getElementById("menu").value;
+    if (!selected) return;
 
-setInterval(refreshDashboard, 10000); // refresh every 10 seconds
+    // Clear existing viz
+    document.getElementById("vizContainer").innerHTML = "";
+
+    // Create new Tableau object dynamically
+    const obj = document.createElement("object");
+    obj.className = "tableauViz";
+    obj.width = "1000";
+    obj.height = "800";
+
+    const host = document.createElement("param");
+    host.name = "host_url";
+    host.value = "https://public.tableau.com/";
+
+    const name = document.createElement("param");
+    name.name = "name";
+    name.value = selected;
+
+    const tabs = document.createElement("param");
+    tabs.name = "tabs";
+    tabs.value = "no";
+
+    const toolbar = document.createElement("param");
+    toolbar.name = "toolbar";
+    toolbar.value = "yes";
+
+    obj.appendChild(host);
+    obj.appendChild(name);
+    obj.appendChild(tabs);
+    obj.appendChild(toolbar);
+
+
+
+    document.getElementById("vizContainer").appendChild(obj);
+    alert( document.getElementById("vizContainer").innerHTML);
+  }
 </script>
 
+  <script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
 
-<script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+</body>
+</html>
